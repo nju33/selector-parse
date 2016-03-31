@@ -14,7 +14,7 @@ npm i selector-parse
 
 in browser
 
-```
+```html
 <script src="selector-parse.js"></script>
 <!-- <script src="selector-parse.min.js"></script> -->
 ```
@@ -25,7 +25,7 @@ IE >= 9, *
 
 ## Example
 
-```
+```js
 const selectorParse = require('selector-parse');
 
 const selector = 'a#btn.box__a.icon__link[role=button][data-bool]';
@@ -36,7 +36,7 @@ console.log(result);
 
 output
 
-```
+```js
 { tag: 'a',
   id: [ 'btn' ],
   class: [ 'box__a', 'icon__link' ],
