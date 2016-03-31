@@ -1,7 +1,7 @@
 {
   "name": "selector-parse",
   "version": "0.1.0",
-  "description": "",
+  "description": "Selector parser",
   "main": "dist/selector-parse.js",
   "scripts": {
     "build": "rollup -c",
