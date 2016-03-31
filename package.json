@@ -1,13 +1,16 @@
 {
   "name": "selector-parse",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Selector parser",
   "main": "dist/selector-parse.js",
+  "jsnext:main": "es/selector-parse.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c rollup.commonjs.config.js",
     "prestart": "npm run build",
     "start": "chokidar lib/selector-parse.js -c 'npm run build'",
-    "prepublish": "uglifyjs dist/selector-parse.js -o dist/selector-parse.min.js -cm --comments all",
+    "minify": "uglifyjs dist/selector-parse.js -o dist/selector-parse.min.js -cm --comments all",
+    "prepublish": "rollup -c rollup.es6.config.js",
+    "postpublish": "rm -rf es",
     "test": "xo && ava"
   },
   "repository": {
