@@ -1,5 +1,5 @@
 {
-  "name": "selector-parse.js",
+  "name": "selector-parse",
   "version": "0.1.0",
   "description": "",
   "main": "dist/selector-parse.js",
