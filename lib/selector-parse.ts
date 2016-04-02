@@ -3,7 +3,7 @@ interface Detail {
   val: string;
 }
 
-function selectorParse(selector: string): any {
+export default function selectorParse(selector: string): any {
   const re = /([#.[]?[^#.\[]+)/g;
   const matches = selector.match(re);
   if (matches) {

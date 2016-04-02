@@ -5,12 +5,10 @@
   "main": "dist/selector-parse.js",
   "jsnext:main": "es/selector-parse.js",
   "scripts": {
-    "build": "rollup -c rollup.commonjs.config.js",
-    "prestart": "npm run build",
-    "start": "chokidar lib/selector-parse.js -c 'npm run build'",
-    "minify": "uglifyjs dist/selector-parse.js -o dist/selector-parse.min.js -cm --comments all",
-    "prepublish": "rollup -c rollup.es6.config.js",
-    "postpublish": "rm -rf es",
+    "start": "gulp build",
+    "min": "gulp minify",
+    "prepublish": "gulp build && gulp es6",
+    "postpublish": "rm -rf es/",
     "test": "xo && ava"
   },
   "repository": {
@@ -24,6 +22,9 @@
   ],
   "author": "nju33",
   "license": "MIT",
+  "typescript": {
+    "definition": "index.d.ts"
+  },
   "bugs": {
     "url": "https://github.com/totora0155/selector-parse.js/issues"
   },
@@ -32,6 +33,14 @@
     "ava": "^0.13.0",
     "babel-preset-es2015-rollup": "^1.1.1",
     "chokidar-cli": "^1.2.0",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-header": "^1.7.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^2.12.1",
+    "gulp-uglify": "^1.5.3",
+    "gulp-watch": "^4.3.5",
+    "object-assign": "^4.0.1",
     "rollup": "^0.25.6",
     "rollup-plugin-babel": "^2.4.0",
     "uglify-js": "^2.6.2",
