@@ -1,5 +1,5 @@
-const selectorParse = require('..');
-const test = require('ava');
+import selectorParse from '..';
+import test from 'ava';
 
 test('#id', t => {
   const result = selectorParse('#id');

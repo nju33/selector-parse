@@ -2,7 +2,6 @@ const path = require('path');
 const assign = require('object-assign');
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
-const watch = require('gulp-watch');
 const header = require('gulp-header');
 
 const license = `/*!
@@ -17,9 +16,7 @@ gulp.task('umd', () => {
   const tsConfig = require('./tsconfig');
   const src = tsConfig.filesGlob;
   const dest = 'dist/';
-  const opts = assign(tsConfig.compilerOptions, {
-    target: 'es5',
-  });
+  const opts = tsConfig.compilerOptions;
 
   gulp
     .src(src)
@@ -39,15 +36,16 @@ gulp.task('es6', () => {
   const tsConfig = require('./tsconfig');
   const src = tsConfig.filesGlob;
   const dest = 'es/';
-  const opts = assign(tsConfig.compilerOptions, {
-    target: 'es6',
+  const opts = assign({}, tsConfig.compilerOptions, {
+    module: 'es2015',
+    target: 'es6'
   });
 
   gulp
     .src(src)
     .pipe(ts(opts))
     .pipe(gulp.dest(dest));
-})
+});
 
 gulp.task('minify', ['ts'], () => {
   const uglify = require('gulp-uglify');

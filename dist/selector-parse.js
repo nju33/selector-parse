@@ -3,34 +3,65 @@
  * Released under the MIT License
  * https://github.com/totora0155/selector-parse.js
  */
-"use strict";function selectorParse(t){var r=/([#.[]?[^#.\[]+)/g,e=t.match(r);return e?traverse(e):{}}function traverse(t){var r={};return t.forEach(function(t){var e=specify(t);e.attr?(r[e.attr]||(r[e.attr]=[]),r[e.attr].push(e.val)):r.tag=e.val}),r.tag||(r.tag="div"),r}function specify(t){if("#"===t[0]){var r="id",e=t.slice(1,t.length);return{attr:r,val:e}}if("."===t[0]){var r="class",e=t.slice(1,t.length);return{attr:r,val:e}}if("["===t[0]&&"]"===t[t.length-1]){var a=t.slice(1,t.length-1),l=a.split("="),r=l[0],e=l[1];return{attr:r,val:e}}return{attr:null,val:t}}Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=selectorParse;val;
+(function (factory) {
+    if (typeof module === 'object' && typeof module.exports === 'object') {
+        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === 'function' && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    function selectorParse(selector) {
+        var re = /([#.[]?[^#.\[]+)/g;
+        var matches = selector.match(re);
+        if (matches) {
+            return traverse(matches);
         }
-    });
-    if (!result.tag) {
-        result.tag = 'div';
+        return {};
     }
-    return result;
-}
-function specify(selector) {
-    if (selector[0] === '#') {
-        var attr = 'id';
-        var val = selector.slice(1, selector.length);
-        return { attr: attr, val: val };
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = selectorParse;
+    function traverse(selectors) {
+        var result = {};
+        selectors.forEach(function (selector) {
+            var detail = specify(selector);
+            if (detail.attr) {
+                if (!result[detail.attr]) {
+                    result[detail.attr] = [];
+                }
+                result[detail.attr].push(detail.val);
+            }
+            else {
+                result.tag = detail.val;
+            }
+        });
+        if (!result.tag) {
+            result.tag = 'div';
+        }
+        return result;
     }
-    else if (selector[0] === '.') {
-        var attr = 'class';
-        var val = selector.slice(1, selector.length);
-        return { attr: attr, val: val };
+    function specify(selector) {
+        if (selector[0] === '#') {
+            var attr = 'id';
+            var val = selector.slice(1, selector.length);
+            return { attr: attr, val: val };
+        }
+        else if (selector[0] === '.') {
+            var attr = 'class';
+            var val = selector.slice(1, selector.length);
+            return { attr: attr, val: val };
+        }
+        else if (selector[0] === '[' && selector[selector.length - 1] === ']') {
+            var sliced = selector.slice(1, selector.length - 1);
+            var splited = sliced.split('=');
+            var attr = splited[0];
+            var val = splited[1];
+            return { attr: attr, val: val };
+        }
+        return {
+            attr: null,
+            val: selector
+        };
     }
-    else if (selector[0] === '[' && selector[selector.length - 1] === ']') {
-        var sliced = selector.slice(1, selector.length - 1);
-        var splited = sliced.split('=');
-        var attr = splited[0];
-        var val = splited[1];
-        return { attr: attr, val: val };
-    }
-    return {
-        attr: null,
-        val: selector
-    };
-}
+});
