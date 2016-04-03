@@ -12,7 +12,7 @@ export default function selectorParse(selector: string): any {
   return {};
 }
 
-function traverse(selectors: Array<string>): any {
+function traverse(selectors: string[]): any {
   const result: any = {};
 
   selectors.forEach(selector => {
@@ -46,7 +46,7 @@ function specify(selector: string): Detail {
 
   } else if (selector[0] === '[' && selector[selector.length - 1] === ']') {
     const sliced: string = selector.slice(1, selector.length - 1);
-    const splited: Array<string> = sliced.split('=');
+    const splited: string[] = sliced.split('=');
     const attr = splited[0];
     const val = splited[1];
     return {attr, val};

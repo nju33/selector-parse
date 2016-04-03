@@ -5,6 +5,7 @@
   "main": "dist/selector-parse.js",
   "jsnext:main": "es/selector-parse.js",
   "scripts": {
+    "prestart": "gulp umd",
     "start": "gulp build",
     "min": "gulp minify",
     "prepublish": "gulp build && gulp es6",

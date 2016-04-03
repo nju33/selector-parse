@@ -26,9 +26,9 @@ gulp.task('umd', () => {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('build', ['ts'], () => {
+gulp.task('build', () => {
   const src = require('./tsconfig').filesGlob;
-  gulp.watch(src, ['ts']);
+  gulp.watch(src, ['umd']);
 });
 
 gulp.task('es6', () => {
