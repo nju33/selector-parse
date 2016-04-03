@@ -18,7 +18,6 @@ in browser
 
 ```html
 <script src="selector-parse.js"></script>
-<!-- <script src="selector-parse.min.js"></script> -->
 ```
 
 ## Browser
@@ -29,19 +28,20 @@ IE >= 9, *
 
 ```js
 const selectorParse = require('selector-parse');
-
-const selector = 'a#btn.box__a.icon__link[role=button][data-bool]';
+const selector = `input
+                  #name
+                  .default.input__text
+                  [placeholder=John][required]
+                  [data-id=123][data-key=foo]`;
 const result = selectorParse(selector);
-
 console.log(result);
-```
 
-output
+// { tag: 'input',
+//   id: 'name',
+//   placeholder: 'John',
+//   required: true,
+//   dataSet: { id: '123', key: 'foo' },
+//   classList: [ 'default', 'input__text' ],
+//   className: 'default input__text' }
 
-```js
-{ tag: 'a',
-  id: [ 'btn' ],
-  class: [ 'box__a', 'icon__link' ],
-  role: [ 'button' ],
-  'data-bool': [ true ] }
 ```

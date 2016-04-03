@@ -1,6 +1,6 @@
 {
   "name": "selector-parse",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Selector parser",
   "main": "dist/selector-parse.js",
   "jsnext:main": "es/selector-parse.js",
@@ -11,11 +11,11 @@
     "minify": "uglifyjs dist/selector-parse.js -o dist/selector-parse.min.js -cm --comments all",
     "prepublish": "rollup -c rollup.es6.config.js",
     "postpublish": "rm -rf es",
-    "test": "xo && ava"
+    "test": "xo && ava -v"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/totora0155/selector-parse.js.git"
+    "url": "git+https://github.com/totora0155/selector-parse.git"
   },
   "keywords": [
     "css",
@@ -25,9 +25,9 @@
   "author": "nju33",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/totora0155/selector-parse.js/issues"
+    "url": "https://github.com/totora0155/selector-parse/issues"
   },
-  "homepage": "https://github.com/totora0155/selector-parse.js#readme",
+  "homepage": "https://github.com/totora0155/selector-parse#readme",
   "devDependencies": {
     "ava": "^0.13.0",
     "babel-preset-es2015-rollup": "^1.1.1",
