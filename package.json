@@ -39,6 +39,9 @@
   },
   "xo": {
     "esnext": true,
-    "space": 2
+    "space": 2,
+    "ignores": [
+      "es/**"
+    ]
   }
 }
