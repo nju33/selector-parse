@@ -21,19 +21,35 @@
   function traverse(selectors) {
     var result = {};
     selectors.forEach(function (selector) {
-      var detail = specity(selector);
+      var detail = specity(selector.trim());
       if (detail.attr) {
-        if (!result[detail.attr]) {
-          result[detail.attr] = [];
+        if (result[detail.attr] && detail.attr === 'class') {
+          result.class.push(detail.val);
+        } else if (detail.attr === 'class') {
+          result.class = [detail.val];
+        } else if (!result[detail.attr]) {
+          result[detail.attr] = detail.val;
         }
-        result[detail.attr].push(detail.val);
       } else {
         result.tag = detail.val;
       }
     });
 
+    result.dataSet = Object.keys(result).filter(function (attr) {
+      return attr.indexOf('data-') === 0;
+    }).reduce(function (dataSet, attr) {
+      dataSet[attr.substr(5)] = result[attr];
+      delete result[attr];
+      return dataSet;
+    }, {});
+
     if (!result.tag) {
       result.tag = 'div';
+    }
+    if (result.class) {
+      result.className = result.classList = result.class;
+      result.className = result.className.join(' ');
+      delete result.class;
     }
     return result;
   }

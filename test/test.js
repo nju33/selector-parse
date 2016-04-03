@@ -1,25 +1,53 @@
 const selectorParse = require('..');
 const test = require('ava');
 
-test('#id', t => {
-  const result = selectorParse('#id');
-  t.is(result.tag, 'div', 'Not equal result.tag is \'div\'');
-  t.same(result.id, ['id'], 'Not equal result.id is [\'id\']');
+test('a', t => {
+  const {tag} = selectorParse('a');
+  t.is(tag, 'a');
 });
 
-test('a.class', t => {
-  const result = selectorParse('a.class');
-  t.is(result.tag, 'a', 'Not equal result.tag is \'a\'');
-  t.same(result.class, ['class'], 'Not equal reuslt.class is [\'class\']');
+test('a#id', t => {
+  const {tag, id} = selectorParse('a#id');
+  t.is(tag, 'a');
+  t.is(id, 'id');
+});
+
+test('#id', t => {
+  const {tag, id} = selectorParse('#id');
+  t.is(tag, 'div');
+  t.is(id, 'id');
+});
+
+test('#valid#invalid', t => {
+  const {id} = selectorParse('#valid#invalid');
+  t.is(id, 'valid');
+});
+
+test('.class', t => {
+  const {className, classList} = selectorParse('a.class');
+  t.is(className, 'class');
+  t.same(classList, ['class']);
+});
+
+test('.btn.btn--large[class=icon__link]', t => {
+  const {className, classList} = selectorParse('.btn.btn--large[class=icon__link]');
+  t.is(className, 'btn btn--large icon__link');
+  t.same(classList, ['btn', 'btn--large', 'icon__link']);
 });
 
 test('[test]', t => {
-  const result = selectorParse('[test]');
-  t.same(result.test, [true], 'Not equal result.test is [true]');
+  const {test} = selectorParse('[test]');
+  t.ok(test);
+});
+
+test('[test][test=false]', t => {
+  const {test} = selectorParse('[test]');
+  t.ok(test);
 });
 
 test('[data-id=1][data-lang=js]', t => {
-  const result = selectorParse('[data-id=1][data-lang=js]');
-  t.same(result['data-id'], ['1'], 'Not equal result[\'data-id\'] is [\'1\']');
-  t.same(result['data-lang'], ['js'], 'Not equal result[\'data-lang\'] is [\'js\']');
+  const {dataSet} = selectorParse('[data-id=1][data-lang=js]');
+  t.is(Object.keys(dataSet).length, 2);
+  t.is(dataSet.id, '1');
+  t.is(dataSet.lang, 'js');
 });
