@@ -10,7 +10,7 @@
 }(this, function () { 'use strict';
 
   function selectorParse(selector) {
-    var re = /([#.[]?[^#.\[]+)/g;
+    var re = /([#.[{]?[^#.\[{]+)/g;
     var matches = selector.match(re);
     if (matches) {
       return traverse(matches);
@@ -70,6 +70,11 @@
       var attr = splited[0];
       var val = splited[1] || true;
       return { attr: attr, val: val };
+    } else if (selector[0] === '{' && selector[selector.length - 1] === '}') {
+      return {
+        attr: 'text',
+        val: selector.match(/{(.*)}/)[1]
+      };
     }
     return {
       attr: null,
