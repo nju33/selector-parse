@@ -1,6 +1,6 @@
 {
   "name": "selector-parse",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Selector parser",
   "main": "dist/selector-parse.js",
   "jsnext:main": "es/selector-parse.js",

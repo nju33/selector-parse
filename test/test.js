@@ -53,6 +53,6 @@ test('[data-id=1][data-lang=js]', t => {
 });
 
 test(`{text}`, t => {
-  const {text} = selectorParse('{text}');
-  t.is(text, 'text');
+  const {innerText} = selectorParse('{text}');
+  t.is(innerText, 'text');
 });

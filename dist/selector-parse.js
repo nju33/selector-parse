@@ -72,7 +72,7 @@
       return { attr: attr, val: val };
     } else if (selector[0] === '{' && selector[selector.length - 1] === '}') {
       return {
-        attr: 'text',
+        attr: 'innerText',
         val: selector.match(/{(.*)}/)[1]
       };
     }

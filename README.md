@@ -45,7 +45,7 @@ output like this
   id: 'name',
   placeholder: 'John',
   required: true,
-  text: 'text',
+  innerText: 'text',
   dataSet: { id: '123', key: 'foo' },
   classList: [ 'default', 'input__text' ],
   className: 'default input__text' }
