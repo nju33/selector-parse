@@ -27,8 +27,6 @@
         selector = cache + selector;
       }
 
-      console.log(selector);
-
       if (selector[0] === '[') {
         if (!selector.endsWith(']')) {
           cache = selector;
