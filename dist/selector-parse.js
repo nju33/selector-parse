@@ -20,7 +20,23 @@
 
   function traverse(selectors) {
     var result = {};
+    var cache = null;
     selectors.forEach(function (selector) {
+      selector = selector.trim();
+      if (cache !== null) {
+        selector = cache + selector;
+      }
+
+      console.log(selector);
+
+      if (selector[0] === '[') {
+        if (!selector.endsWith(']')) {
+          cache = selector;
+          return;
+        }
+      }
+      cache = null;
+
       var detail = specity(selector.trim());
       if (detail.attr) {
         if (result[detail.attr] && detail.attr === 'class') {
