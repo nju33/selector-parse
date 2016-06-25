@@ -51,3 +51,8 @@ test('[data-id=1][data-lang=js]', t => {
   t.is(dataSet.id, '1');
   t.is(dataSet.lang, 'js');
 });
+
+test(`{text}`, t => {
+  const {text} = selectorParse('{text}');
+  t.is(text, 'text');
+});

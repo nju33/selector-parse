@@ -27,21 +27,26 @@ IE >= 9, *
 ## Example
 
 ```js
-const selectorParse = require('selector-parse');
+const selectorParse = require('selector-parse.js');
 const selector = `input
                   #name
                   .default.input__text
                   [placeholder=John][required]
-                  [data-id=123][data-key=foo]`;
+                  [data-id=123][data-key=foo]
+                  {text}`;
 const result = selectorParse(selector);
 console.log(result);
+```
 
-// { tag: 'input',
-//   id: 'name',
-//   placeholder: 'John',
-//   required: true,
-//   dataSet: { id: '123', key: 'foo' },
-//   classList: [ 'default', 'input__text' ],
-//   className: 'default input__text' }
+output like this
 
+```js
+{ tag: 'input',
+  id: 'name',
+  placeholder: 'John',
+  required: true,
+  text: 'text',
+  dataSet: { id: '123', key: 'foo' },
+  classList: [ 'default', 'input__text' ],
+  className: 'default input__text' }
 ```
